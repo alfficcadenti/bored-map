@@ -26,6 +26,25 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.map-container {
+  position: fixed!important;
+}
+
+.mapboxgl-ctrl-logo {
+  display: none !important;
+}
+
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
