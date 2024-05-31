@@ -1,12 +1,13 @@
 import { Map } from "mapbox-gl";
+import { GeoJsonProperties, Geometry, Feature } from 'geojson';
 
 export const randomPoints = (numPoints: number, bounds: [number, number, number, number]) => {
   const [minLng, minLat, maxLng, maxLat] = bounds;
-  const points = [];
+  const points: Feature<Geometry, GeoJsonProperties>[] = [];
   for (let i = 0; i < numPoints; i++) {
       const lng = Math.random() * (maxLng - minLng) + minLng;
       const lat = Math.random() * (maxLat - minLat) + minLat;
-      points.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [lng, lat] } });
+      points.push({ type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [lng, lat] } });
   }
   return points;
 };
