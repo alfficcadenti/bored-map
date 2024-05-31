@@ -5,6 +5,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { randomPoints } from '@/lib/helper';
 import { MAP_STYLES } from '@/lib/constants';
+import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN as string;
 
@@ -14,7 +15,7 @@ const ExploreMap: React.FC = () => {
     const mapRef = useRef<mapboxgl.Map | null>(null);
     const [zoom] = useState(3);
 
-    const points = {
+    const points: FeatureCollection<Geometry, GeoJsonProperties> = {
         type: 'FeatureCollection',
         features: randomPoints(10000, [-180, -90, 180, 90])
     };

@@ -5,17 +5,18 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { MAP_STYLES } from '@/lib/constants';
 import { spinGlobe } from '@/lib/helper';
-
+import { LngLatLike } from 'mapbox-gl';
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN as string;
 
 type Chapter = {
   bearing: number;
-  center: number[];
+  center: LngLatLike;
   zoom: number;
   pitch?: number;
   duration?: number;
   speed?: number;
 };
+
 
 const chapters: Record<string, Chapter> = {
   bored: {
