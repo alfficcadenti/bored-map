@@ -166,7 +166,7 @@ const Homepage = () => {
       <div ref={mapContainer} className="map-container w-full h-screen fixed top-0" />
       <div ref={mainRef} className="z-10 items-center justify-between font-mono text-3xl flex flex-col snap-y snap-mandatory overflow-y-scroll h-screen w-full scrollbar-hide">
         <div className="min-h-screen snap-always snap-center flex items-center justify-center h-screen" id="bored">
-          <img src="/logo.svg" alt="Logo" />
+          <img src="/logo.png" alt="Logo" />
         </div>
         <div className="min-h-screen snap-always snap-center flex justify-start w-full items-center " id="apes">
           <div className='w-half md:w-1/3 border-2 border-[#EC4B28] bg-black bg-opacity-40 font-bold text-[#EC4B28] rounded-lg p-8 text-center flex flex-col gap-4'>
