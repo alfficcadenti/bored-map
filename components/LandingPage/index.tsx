@@ -136,8 +136,8 @@ const Homepage = () => {
 
     markersData.forEach((markerData) => {
       const el = document.createElement('div');
-      const width = 12;
-      const height = 13;
+      const width = 25;
+      const height = 30;
       el.className = 'marker';
       el.style.backgroundImage = `url(/pin.svg)`;
       el.style.width = `${width}px`;
