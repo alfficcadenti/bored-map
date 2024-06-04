@@ -162,13 +162,13 @@ const Homepage = () => {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-4 md:p-24">
       <div ref={mapContainer} className="map-container w-full h-screen fixed top-0" />
       <div ref={mainRef} className="z-10 items-center justify-between font-mono text-3xl flex flex-col snap-y snap-mandatory overflow-y-scroll h-screen w-full scrollbar-hide">
-        <div className="min-h-screen snap-always snap-center flex items-center justify-center h-screen" id="bored">
+        <div className="min-h-screen snap-always snap-center flex pb-32 md:pb-none items-end md:items-center justify-center h-screen" id="bored">
           <img src="/logo.svg" alt="Logo" />
         </div>
-        <div className="min-h-screen snap-always snap-center flex justify-start w-full items-center " id="apes">
+        <div className="min-h-screen snap-always snap-center flex justify-start w-full pb-32 md:pb-none items-end md:items-center " id="apes">
           <div className='w-half md:w-1/3 border-2 border-[#EC4B28] bg-black bg-opacity-40 font-bold text-[#EC4B28] rounded-lg p-8 text-center flex flex-col gap-4'>
             <div className="uppercase">By apes, for apes
             </div>
@@ -181,7 +181,7 @@ const Homepage = () => {
             </div>
           </div>
         </div>
-        <div className="min-h-screen snap-always snap-center flex items-center justify-end w-full " id="mbas">
+        <div className="min-h-screen snap-always snap-center flex pb-32 md:pb-none items-end md:items-center justify-end w-full " id="mbas">
           <div className='w-half  md:w-1/3  border-2 border-[#EC4B28] bg-black bg-opacity-40 font-bold text-[#EC4B28] rounded-lg p-8 text-center flex flex-col gap-4'>
             <div className="uppercase">local clubs and MBAS
             </div>
@@ -191,7 +191,7 @@ const Homepage = () => {
             </div>
           </div>
         </div>
-        <div className="min-h-screen snap-always snap-center flex items-center justify-start w-full" id="events">
+        <div className="min-h-screen snap-always snap-center flex pb-32 md:pb-none items-end md:items-center justify-start w-full" id="events">
           <div className='w-half md:w-1/3  border-2 border-[#EC4B28] bg-black bg-opacity-40 font-bold text-[#EC4B28] rounded-lg p-8 text-center flex flex-col gap-4'>
           <div className="uppercase">Events and travel
             </div>
@@ -203,7 +203,7 @@ const Homepage = () => {
         </div>
 
 
-        <div className="min-h-screen snap-always snap-center flex items-center justify-center w-full" id="register">
+        <div className="min-h-screen snap-always snap-center flex pb-32 md:pb-none items-end md:items-center justify-center w-full" id="register">
           <div className='w-half border-2 border-[#EC4B28] bg-black bg-opacity-40 font-bold text-[#EC4B28] rounded-lg p-8 text-center'>
             <div className="uppercase">Get notified on launch
             </div>
