@@ -66,6 +66,7 @@ const Homepage = () => {
   const mainRef = useRef<HTMLDivElement | null>(null);
 
   const [spinEnabled, setSpinEnabled] = useState(true);
+  const [email, setEmail] = useState('');
 
   const map = useRef<mapboxgl.Map | null>(null);
   const [lat] = useState(48);
@@ -155,6 +156,23 @@ const Homepage = () => {
     setSpinEnabled((prev) => !prev);
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const res = await fetch('/api/submit-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    if (res.ok) {
+      alert('Email submitted successfully!');
+    } else {
+      alert('Error submitting email.');
+    }
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4 md:p-24">
       <div
@@ -236,14 +254,15 @@ const Homepage = () => {
           <div className="w-half border-2 border-[#EC4B28] bg-black bg-opacity-40 font-bold text-[#EC4B28] rounded-lg p-8 text-center">
             <div className="uppercase">Get notified on launch</div>
             <div>
-              <form>
+              <form onSubmit={handleSubmit}>                
                 <div className="flex flex-col md:flex-row gap-2 pt-4 ">
                   <input
                     className="w-full rounded-lg p-2 border-[#EC4B28] border-2 bg-transparent"
                     type="email"
                     required
                     placeholder="Email"
-                    value=""
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                   />
                   <button type="submit">Join</button>
                 </div>

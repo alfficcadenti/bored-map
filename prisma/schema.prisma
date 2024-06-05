@@ -1,0 +1,14 @@
+// prisma/schema.prisma
+datasource db {
+  provider = "postgresql" // or "mysql" or "sqlite" depending on your database
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Email {
+  id      Int    @id @default(autoincrement())
+  address String @unique
+}
