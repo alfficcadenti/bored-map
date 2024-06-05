@@ -17,6 +17,7 @@ type Chapter = {
   speed?: number;
 };
 
+
 const chapters: Record<string, Chapter> = {
   bored: {
     bearing: 0,
