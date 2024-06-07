@@ -1,9 +1,14 @@
+// pages/api/submit-email.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
+import cors, { runMiddleware } from '../../utils/cors';
 
 const prisma = new PrismaClient();
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Run the CORS middleware
+  await runMiddleware(req, res, cors);
+
   if (req.method === 'POST') {
     const { email } = req.body;
 
@@ -13,9 +18,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       });
       res.status(200).json({ message: 'Email stored successfully' });
     } catch (error) {
+      console.error(error);
       res.status(500).json({ error: 'Error storing email' });
     }
   } else {
     res.status(405).json({ message: 'Method not allowed' });
   }
-};
+}

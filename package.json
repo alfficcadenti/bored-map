@@ -12,6 +12,7 @@
   "dependencies": {
     "@next/third-parties": "^14.2.3",
     "@prisma/client": "^5.15.0",
+    "cors": "^2.8.5",
     "geojson": "^0.5.0",
     "google": "link:@next/third-parties/google",
     "mapbox-gl": "^3.4.0",
