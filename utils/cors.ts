@@ -1,5 +1,5 @@
-// utils/cors.ts
 import Cors from 'cors';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 // Initializing the CORS middleware
 const cors = Cors({
@@ -9,9 +9,9 @@ const cors = Cors({
 });
 
 // Helper method to wait for the middleware to execute before continuing
-function runMiddleware(req, res, fn) {
+function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: (req: NextApiRequest, res: NextApiResponse, callback: (result: any) => void) => void) {
   return new Promise((resolve, reject) => {
-    fn(req, res, (result) => {
+    fn(req, res, (result: any) => {
       if (result instanceof Error) {
         return reject(result);
       }
