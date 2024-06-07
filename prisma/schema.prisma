@@ -1,6 +1,6 @@
 // prisma/schema.prisma
 datasource db {
-  provider = "postgresql" // or "mysql" or "sqlite" depending on your database
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -9,6 +9,7 @@ generator client {
 }
 
 model Email {
-  id      Int    @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   address String @unique
+  createdAt DateTime @default(now())
 }
