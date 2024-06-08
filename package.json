@@ -12,7 +12,7 @@
   "dependencies": {
     "@next/third-parties": "^14.2.3",
     "@prisma/client": "^5.15.0",
-    "cors": "^2.8.5",
+    "@vercel/postgres": "^0.8.0",
     "geojson": "^0.5.0",
     "google": "link:@next/third-parties/google",
     "mapbox-gl": "^3.4.0",
@@ -22,6 +22,7 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@prisma/client": "^5.15.0",
     "@types/cors": "^2.8.17",
     "@types/geojson": "^7946.0.14",
     "@types/mapbox-gl": "^3.1.0",

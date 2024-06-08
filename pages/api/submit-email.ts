@@ -1,15 +1,11 @@
 // pages/api/submit-email.ts
 import { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient } from '@prisma/client';
-import cors, { runMiddleware } from '../../utils/cors';
+import {PrismaClient} from '@prisma/client'
 
 const prisma = new PrismaClient();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  // Run the CORS middleware
-  await runMiddleware(req, res, cors);
-
-  if (req.method === 'POST') {
+  if ('body' in req) {
     const { email } = req.body;
 
     try {
