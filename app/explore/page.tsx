@@ -8,7 +8,7 @@ const Explore = () => {
     //random data. add here api fetch to get real data
     const data: FeatureCollection<Geometry, GeoJsonProperties> = {
         type: 'FeatureCollection',
-        features: randomPoints(10000, [-180, -90, 180, 90])
+        features: randomPoints(1000, [-120, -70, 120, 70])
     };
 
 return <ExploreMap data={data} />

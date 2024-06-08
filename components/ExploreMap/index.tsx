@@ -3,7 +3,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { randomPoints } from '@/lib/helper';
 import { MAP_STYLES } from '@/lib/constants';
 import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
 
@@ -13,14 +12,14 @@ interface Props {
     data: FeatureCollection<Geometry, GeoJsonProperties>
 }
 
-const ExploreMap: React.FC<Props> = ({data}) => {
+const ExploreMap: React.FC<Props> = ({ data }) => {
     const mapContainer = useRef<HTMLDivElement>(null);
     const mapRef = useRef<mapboxgl.Map | null>(null);
     const [zoom] = useState(3);
 
     useEffect(() => {
         if (mapRef.current || !mapContainer.current) return;
-        
+
         mapRef.current = new mapboxgl.Map({
             container: mapContainer.current,
             style: MAP_STYLES.dark,
@@ -38,29 +37,20 @@ const ExploreMap: React.FC<Props> = ({data}) => {
                     clusterRadius: 80
                 });
 
+                // Add clustering layers
                 mapRef.current.addLayer({
                     id: 'clusters',
                     type: 'circle',
                     source: 'random-points',
                     filter: ['has', 'point_count'],
                     paint: {
-                        'circle-color': [
-                            'step',
-                            ['get', 'point_count'],
-                            '#51bbd6',
-                            5,
-                            '#f1f075',
-                            15,
-                            '#f28cb1'
-                        ],
+                        'circle-color': '#ec4b28',
                         'circle-radius': [
                             'step',
                             ['get', 'point_count'],
-                            30,
-                            100,
-                            50,
-                            750,
-                            60
+                            20,  // size for clusters with less than 50 points
+                            50,  // step value
+                            40   // size for clusters with 50 or more points
                         ]
                     }
                 });
@@ -77,23 +67,31 @@ const ExploreMap: React.FC<Props> = ({data}) => {
                     }
                 });
 
-                mapRef.current.addLayer({
-                    id: 'unclustered-point',
-                    type: 'circle',
-                    source: 'random-points',
-                    filter: ['!', ['has', 'point_count']],
-                    paint: {
-                        'circle-color': '#11b4da',
-                        'circle-radius': 4,
-                        'circle-stroke-width': 1,
-                        'circle-stroke-color': '#fff'
+                // Add unclustered point layer with custom SVG marker
+                mapRef.current.loadImage('/pin24x30.png', (error, image) => {
+                    if (error) {
+                        console.error('Error loading image:', error);
+                        return;
+                    }
+
+                    if (image && mapRef.current) {
+                        mapRef.current.addImage('custom-marker', image);
+
+                        mapRef.current.addLayer({
+                            id: 'unclustered-point',
+                            type: 'symbol',
+                            source: 'random-points',
+                            filter: ['!', ['has', 'point_count']],
+                            layout: {
+                                'icon-image': 'custom-marker',
+                                'icon-size': 1
+                            }
+                        });
                     }
                 });
             }
-
-
         });
-        
+
     }, [zoom, data]);
 
     return (
