@@ -9,16 +9,14 @@ import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN as string;
 
+interface Props {
+    data: FeatureCollection<Geometry, GeoJsonProperties>
+}
 
-const ExploreMap: React.FC = () => {
+const ExploreMap: React.FC<Props> = ({data}) => {
     const mapContainer = useRef<HTMLDivElement>(null);
     const mapRef = useRef<mapboxgl.Map | null>(null);
     const [zoom] = useState(3);
-
-    const points: FeatureCollection<Geometry, GeoJsonProperties> = {
-        type: 'FeatureCollection',
-        features: randomPoints(10000, [-180, -90, 180, 90])
-    };
 
     useEffect(() => {
         if (mapRef.current || !mapContainer.current) return;
@@ -34,7 +32,7 @@ const ExploreMap: React.FC = () => {
             if (mapRef.current) {
                 mapRef.current.addSource('random-points', {
                     type: 'geojson',
-                    data: points,
+                    data,
                     cluster: true,
                     clusterMaxZoom: 50,
                     clusterRadius: 80
@@ -96,7 +94,7 @@ const ExploreMap: React.FC = () => {
 
         });
         
-    }, [zoom, points]);
+    }, [zoom, data]);
 
     return (
         <div ref={mapContainer} className="map-container w-full h-screen fixed top-0" />

@@ -67,6 +67,7 @@ const Homepage = () => {
 
   const [spinEnabled, setSpinEnabled] = useState(true);
   const [email, setEmail] = useState('');
+  const [hasJoined, setHasJoined] = useState(false);
 
   const map = useRef<mapboxgl.Map | null>(null);
   const [lat] = useState(48);
@@ -167,7 +168,7 @@ const Homepage = () => {
     });
 
     if (res.ok) {
-      alert('Email submitted successfully!');
+      setHasJoined(true);
     } else {
       alert('Error submitting email.');
     }
@@ -252,19 +253,20 @@ const Homepage = () => {
           id="register"
         >
           <div className="w-half border-2 border-[#EC4B28] bg-black bg-opacity-40 font-bold text-[#EC4B28] rounded-lg p-8 text-center">
-            <div className="uppercase">Get notified on launch</div>
+            <div className="uppercase">{`${hasJoined ? 'We will notify you' : 'Get notified'} on launch`}</div>
             <div>
               <form onSubmit={handleSubmit}>                
                 <div className="flex flex-col md:flex-row gap-2 pt-4 ">
                   <input
                     className="w-full rounded-lg p-2 border-[#EC4B28] border-2 bg-transparent"
                     type="email"
+                    id="email"
                     required
                     placeholder="Email"
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
                   />
-                  <button type="submit">Join</button>
+                  <button type="submit" disabled={hasJoined} className="disabled:disabled:text-slate-500">{hasJoined ? "Joined!" : "Join"}</button>
                 </div>
               </form>
             </div>
